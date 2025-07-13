@@ -1,60 +1,135 @@
-# Proyek Sistem Penjualan Tanaman Hias
+# Proyek Akhir Pemrograman Berbasis Objek 1
 
-Proyek ini adalah aplikasi konsol sederhana yang dibuat menggunakan Java untuk mendemonstrasikan konsep dasar Pemrograman Berorientasi Objek (PBO) seperti **inheritance (pewarisan)**, **polymorphism (polimorfisme)**, dan **encapsulation (enkapsulasi)** dalam konteks sistem penjualan tanaman hias.
+Proyek ini adalah contoh sederhana aplikasi pengelolaan data tanaman hias menggunakan Java sebagai tugas akhir dari mata kuliah Pemrograman Berbasis Objek 1.
 
-## Deskripsi Aplikasi
+## Deskripsi
 
-Aplikasi ini memungkinkan pengguna untuk:
-* Memasukkan data tanaman hias, termasuk nama dan harga.
-* Memasukkan data tanaman hias yang spesifik sebagai **tanaman dekoratif** yang memiliki atribut tambahan berupa "jenis tanaman".
-* Menampilkan daftar tanaman yang telah dimasukkan beserta informasinya.
-* Menangani kesalahan input (misalnya, jika harga bukan angka).
+Aplikasi ini mensimulasikan pengelolaan informasi tanaman hias seperti nama, jenis, warna, dan harga. Aplikasi ini mengimplementasikan beberapa konsep penting dalam pemrograman berorientasi objek (OOP) seperti:
 
-## Konsep PBO yang Diterapkan
+- Class  
+- Object  
+- Atribut  
+- Method Constructor  
+- Method Mutator  
+- Method Accessor  
+- Encapsulation  
+- Inheritance  
+- Overriding  
+- IO sederhana  
 
-* **Enkapsulasi**: Atribut `namaTanaman` dan `hargaTanaman` pada kelas `TanamanHias` bersifat `private` dan diakses melalui metode getter (`getNamaTanaman()`, `getHargaTanaman()`) serta dimodifikasi melalui metode setter (`setNamaTanaman()`, `setHargaTanaman()`).
-* **Inheritance (Pewarisan)**: Kelas `TanamanDekoratif` mewarisi properti dan metode dari kelas `TanamanHias`. Ini ditunjukkan oleh `public class TanamanDekoratif extends TanamanHias`.
-* **Polimorfisme**: Metode `tampilkanInfo()` di kelas `TanamanHias` dapat di-override di kelas `TanamanDekoratif` untuk menyediakan informasi yang lebih spesifik untuk tanaman dekoratif. Dalam kelas `TokoTanaman`, objek `TanamanHias` atau `TanamanDekoratif` dapat disimpan dalam array `TanamanHias[]` dan memanggil `tampilkanInfo()` yang sesuai pada saat runtime.
+## Penjelasan Kode
 
-## Struktur File
+1. **Class**  
+   Digunakan untuk membuat struktur dasar objek. Class yang digunakan adalah `TanamanDekoratif`, `TanamanHias`, dan `TokoTanaman`.
 
-* `TokoTanaman.java`:
-    * Kelas utama yang berisi metode `main()`.
-    * Bertanggung jawab untuk menerima input pengguna, membuat objek `TanamanHias` atau `TanamanDekoratif`, dan menampilkannya.
-    * Menerapkan penanganan `NumberFormatException` untuk input harga.
-* `TanamanHias.java`:
-    * Merupakan `superclass` untuk semua jenis tanaman.
-    * Memiliki atribut `namaTanaman` dan `hargaTanaman`.
-    * Menyediakan konstruktor, getter, dan setter.
-    * Memiliki metode `tampilkanInfo()` dasar.
-* `TanamanDekoratif.java`:
-    * Merupakan `subclass` dari `TanamanHias` (`extends TanamanHias`).
-    * Memiliki atribut tambahan `jenisTanaman`.
-    * Meng-override metode `tampilkanInfo()` untuk menyertakan `jenisTanaman`.
+   ```java
+   public class TanamanDekoratif { ... }
 
-## Cara Menggunakan
+   public class TanamanHias extends TanamanDekoratif { ... }
 
-**Prasyarat:**
-Pastikan Anda telah menginstal [Java Development Kit (JDK)](https://www.oracle.com/java/technologies/downloads/) di sistem Anda (disarankan JDK 8 atau versi yang lebih baru).
+   public class TokoTanaman { ... }
+   ```
 
-**Kompilasi:**
-1.  Unduh atau klon repositori ini ke komputer lokal Anda.
-2.  Buka terminal atau command prompt.
-3.  Navigasikan ke direktori `UAS` di mana file `.java` berada.
-    ```bash
-    cd <lokasi_folder_project_anda>/UAS
+2. **Object**  
+   Dibuat untuk mewakili data tanaman secara individual.
+
+   ```java
+   TanamanHias[] tanaman = new TanamanHias[2];
+   tanaman[0] = new TanamanHias("Aglonema", "Indoor", "Hijau", 50000);
+   ```
+
+3. **Atribut**  
+   Merupakan variabel dalam class yang menyimpan data.
+
+   ```java
+   private String nama;
+   private String jenis;
+   private String warna;
+   private double harga;
+   ```
+
+4. **Constructor**  
+   Digunakan untuk inisialisasi data saat objek dibuat.
+
+   ```java
+   public TanamanDekoratif(String nama, String jenis, String warna, double harga) {
+       this.nama = nama;
+       this.jenis = jenis;
+       this.warna = warna;
+       this.harga = harga;
+   }
+   ```
+
+5. **Mutator (Setter)**  
+   Digunakan untuk mengubah nilai atribut.
+
+   ```java
+   public void setNama(String nama) {
+       this.nama = nama;
+   }
+   ```
+
+6. **Accessor (Getter)**  
+   Digunakan untuk mengambil nilai atribut.
+
+   ```java
+   public String getNama() {
+       return nama;
+   }
+   ```
+
+7. **Encapsulation**  
+   Dicapai dengan membuat atribut bersifat `private` dan akses melalui getter/setter.
+
+   ```java
+   private String nama; // tidak bisa diakses langsung dari luar
+   ```
+
+8. **Inheritance**  
+   Ditunjukkan oleh class `TanamanHias` yang mewarisi class `TanamanDekoratif`.
+
+   ```java
+   public class TanamanHias extends TanamanDekoratif
+   ```
+
+9. **Overriding**  
+   Digunakan untuk mengganti method dari superclass di subclass.
+
+   ```java
+   @Override
+   public String displayInfo() {
+       return super.displayInfo() + "\nJenis Tanaman: " + getJenis();
+   }
+   ```
+
+10. **IO Sederhana**  
+    Digunakan untuk mencetak data tanaman ke layar.
+
+    ```java
+    System.out.println(tanaman[i].displayInfo());
     ```
-4.  Kompilasi semua file Java:
-    ```bash
-    javac TokoTanaman.java TanamanHias.java TanamanDekoratif.java
-    ```
-    Atau Anda bisa menggunakan:
-    ```bash
-    javac *.java
-    ```
 
-**Eksekusi:**
-Setelah kompilasi berhasil, Anda dapat menjalankan aplikasi dari direktori `UAS`:
+## Usulan Nilai
 
-```bash
-java TokoTanaman
+| No  | Materi         | Nilai |
+| :-: | -------------- | :---: |
+|  1  | Class          |  5    |
+|  2  | Object         |  5    |
+|  3  | Atribut        |  5    |
+|  4  | Constructor    |  5    |
+|  5  | Mutator        |  5    |
+|  6  | Accessor       |  5    |
+|  7  | Encapsulation  |  5    |
+|  8  | Inheritance    |  5    |
+|  9  | Polymorphism   |  5    |
+| 10  | Seleksi        |  0    |
+| 11  | Perulangan     |  0    |
+| 12  | IO Sederhana   | 10    |
+| 13  | Array          | 15    |
+| 14  | Error Handling |  0    |
+|     | **TOTAL**      | **75** |
+
+## Pembuat
+
+**Nama**: Roofika Rara Rhisma Sughi Sugih Putrie  
+**NPM**: 2310010203
